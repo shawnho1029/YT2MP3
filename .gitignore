@@ -1,4 +1,9 @@
 venv/
 music/
+video/
 downloaded.txt
 *.mp3
+*.mp4
+*.mkv
+*.wav
+*.flac
