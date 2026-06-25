@@ -5,13 +5,15 @@ import shutil
 import zipfile
 import re
 import yt_dlp
-import static_ffmpeg
-
 # Automatically initialize and configure ffmpeg paths
-try:
-    static_ffmpeg.add_paths()
-except Exception as e:
-    st.error(f"Failed to configure FFmpeg: {e}")
+# On Streamlit Cloud (Linux), ffmpeg is pre-installed via packages.txt.
+# On Windows, we fall back to static-ffmpeg.
+if not shutil.which('ffmpeg'):
+    try:
+        import static_ffmpeg
+        static_ffmpeg.add_paths()
+    except Exception as e:
+        st.error(f"Failed to configure FFmpeg: {e}")
 
 # Set page configuration
 st.set_page_config(
