@@ -55,8 +55,7 @@ if st.button("Extract and Download", type="primary"):
             ydl_opts_info = {
                 'quiet': True,
                 'no_warnings': True,
-                'extract_flat': True,
-                'extractor_args': {'youtube': {'player_client': ['mweb', 'web_embedded', 'web']}}
+                'extract_flat': True
             }
             
             try:
@@ -117,7 +116,6 @@ if st.button("Extract and Download", type="primary"):
                         'progress_hooks': [progress_hook],
                         'quiet': True,
                         'no_warnings': True,
-                        'extractor_args': {'youtube': {'player_client': ['mweb', 'web_embedded', 'web']}},
                     }
                     
                     # Handle playlist items range
