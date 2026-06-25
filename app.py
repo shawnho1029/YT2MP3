@@ -56,7 +56,7 @@ if st.button("Extract and Download", type="primary"):
                 'quiet': True,
                 'no_warnings': True,
                 'extract_flat': True,
-                'extractor_args': {'youtube': {'player_client': ['web_embedded', 'web', 'tv']}}
+                'extractor_args': {'youtube': {'player_client': ['mweb', 'web_embedded', 'web']}}
             }
             
             try:
@@ -117,7 +117,7 @@ if st.button("Extract and Download", type="primary"):
                         'progress_hooks': [progress_hook],
                         'quiet': True,
                         'no_warnings': True,
-                        'extractor_args': {'youtube': {'player_client': ['web_embedded', 'web', 'tv']}},
+                        'extractor_args': {'youtube': {'player_client': ['mweb', 'web_embedded', 'web']}},
                     }
                     
                     # Handle playlist items range
