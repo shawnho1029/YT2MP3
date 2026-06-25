@@ -78,16 +78,15 @@ if st.button("Extract and Download", type="primary"):
                     prog_text = st.empty()
                     
                     # Current file download hook
-                    current_title = ""
+                    current_state = {"title": ""}
                     def progress_hook(d):
-                        nonlocal current_title
                         info = d.get('info_dict', {})
                         video_title = info.get('title', 'Unknown Title')
                         playlist_index = info.get('playlist_index')
                         n_entries = info.get('n_entries')
                         
-                        if video_title != current_title:
-                            current_title = video_title
+                        if video_title != current_state["title"]:
+                            current_state["title"] = video_title
                             prefix = f"[{playlist_index}/{n_entries}] " if playlist_index and n_entries else ""
                             prog_text.markdown(f"🎵 **Processing:** {prefix}{video_title}")
                         
