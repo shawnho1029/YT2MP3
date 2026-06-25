@@ -167,6 +167,27 @@ def download_and_convert(url, output_dir, output_filename, audio_format, audio_q
         if not verbose:
             progress_hooks.append(progress_hook)
 
+        from yt_dlp.utils import sanitize_filename
+
+        def my_match_filter(info_dict, *, incomplete):
+            video_title = info_dict.get('title')
+            if not video_title:
+                return None
+            
+            safe_title = sanitize_filename(video_title)
+            
+            if not is_playlist and output_filename:
+                check_name = output_filename
+                if not check_name.endswith(f'.{audio_format}'):
+                    check_name = f"{check_name}.{audio_format}"
+                check_path = os.path.join(output_dir, check_name)
+            else:
+                check_path = os.path.join(output_dir, f"{safe_title}.{audio_format}")
+            
+            if os.path.exists(check_path):
+                return 'Already downloaded (file exists)'
+            return None
+
         ydl_opts = {
             'format': 'bestaudio/best',
             'postprocessors': [{
@@ -181,7 +202,7 @@ def download_and_convert(url, output_dir, output_filename, audio_format, audio_q
             'quiet': not verbose,   
             'no_warnings': not verbose,
             'extractor_args': {'youtube': {'player_client': ['default']}},
-            'download_archive': 'downloaded.txt',
+            'match_filter': my_match_filter,
             'noplaylist': not download_playlist,
         }
         if playlist_items:
