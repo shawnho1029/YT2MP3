@@ -202,9 +202,9 @@ def download_and_convert(url, output_dir, output_filename, download_format, down
             }
             height = height_map.get(download_quality.lower())
             if height:
-                format_selector = f'bestvideo[height<={height}]+bestaudio/best'
+                format_selector = f'bestvideo[height<={height}]+bestaudio[ext=m4a]/bestaudio/best'
             else:
-                format_selector = 'bestvideo+bestaudio/best'
+                format_selector = 'bestvideo+bestaudio[ext=m4a]/bestaudio/best'
         else:
             format_selector = 'bestaudio/best'
             postprocessors.append({
