@@ -92,7 +92,8 @@ def download_and_convert(url, output_dir, output_filename, audio_format, audio_q
             'quiet': not verbose,
             'no_warnings': not verbose,
             'noplaylist': not download_playlist,
-            'extract_flat': True
+            'extract_flat': True,
+            'extractor_args': {'youtube': {'player_client': ['ios', 'web_embedded', 'web', 'tv']}}
         }
         with yt_dlp.YoutubeDL(ydl_opts_info) as ydl:
             info_dict = ydl.extract_info(url, download=False)
@@ -179,7 +180,7 @@ def download_and_convert(url, output_dir, output_filename, audio_format, audio_q
             'progress_hooks': progress_hooks,
             'quiet': not verbose,   
             'no_warnings': not verbose,
-            'extractor_args': {'youtube': {'player_client': ['default']}},
+            'extractor_args': {'youtube': {'player_client': ['ios', 'web_embedded', 'web', 'tv']}},
             'download_archive': 'downloaded.txt',
             'noplaylist': not download_playlist,
         }
